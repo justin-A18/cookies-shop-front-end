@@ -1,0 +1,6 @@
+{
+	"symbols.folders.associations": {
+		"infrastructure": "folder-yellow-outline",
+		"__tests__": "folder-orange-outline",
+	}
+}
