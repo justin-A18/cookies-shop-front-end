@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-
-import { cn } from '@/app/lib/utils';
+import TanStackProvider from './_providers/TanStackProvider';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -24,7 +23,7 @@ export default function RootLayout({
 			<body
 				suppressHydrationWarning
 				className={inter.variable}>
-				{children}
+				<TanStackProvider>{children}</TanStackProvider>
 			</body>
 		</html>
 	);
