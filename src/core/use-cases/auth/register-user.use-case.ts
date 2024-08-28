@@ -6,7 +6,7 @@ export const registerUserUseCase = async (
 	body: Record<string, unknown>
 ) => {
 	const { message } = await apiFetcher.post<MessageResponse>(
-		'/auth/register', 
+		'/auth/register',
 		body
 	);
 	return message;

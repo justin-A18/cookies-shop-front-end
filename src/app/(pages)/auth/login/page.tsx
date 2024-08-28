@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 'use client';
 
 import { loginSchema } from '@/app/_schemas/user.schema';
@@ -16,9 +15,11 @@ import {
 } from '@/app/_components/ui/form';
 
 import { Input } from '@/app/_components/ui/input';
-import { Button } from '@/app/_components/ui/button';
 import { TypographyH1 } from '@/app/_components/shared/typography';
 import { LinkToForm } from '@/app/_components/auth/LinkToForm';
+import { useAuthMutation } from '@/app/_hooks/auth/useAuthMutation';
+import { LoadingButton } from '@/app/_components/shared/buttons/LoadingButton';
+import { CustomAlert } from '@/app/_components/shared/alert';
 
 const LoginPage = () => {
 	const form = useForm<z.infer<typeof loginSchema>>({
@@ -29,8 +30,10 @@ const LoginPage = () => {
 		},
 	});
 
+	const { loginMutation } = useAuthMutation();
+
 	function onSubmit(values: z.infer<typeof loginSchema>) {
-		console.log(values);
+		loginMutation.mutate(values);
 	}
 
 	return (
@@ -39,19 +42,33 @@ const LoginPage = () => {
 				onSubmit={form.handleSubmit(onSubmit)}
 				className='space-y-3 w-full'
 				data-testid='login-form'>
-				<TypographyH1 className='text-center'>Sign In</TypographyH1>
+				<TypographyH1 className='text-center text-3xl font-bold'>
+					¡Bienvenido de nuevo Dulzura!
+				</TypographyH1>
+
+				{loginMutation.isError && (
+					<CustomAlert variant='destructive'>
+						¡Vaya! Algo salió mal. {loginMutation.error.message}
+					</CustomAlert>
+				)}
+
+				{loginMutation.isSuccess && (
+					<CustomAlert variant='success'>
+						¡Delicioso! Has iniciado sesión con éxito.
+					</CustomAlert>
+				)}
 
 				<FormField
 					control={form.control}
 					name='email'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Email</FormLabel>
+							<FormLabel>Correo Electrónico</FormLabel>
 							<FormControl>
 								<Input
 									type='email'
 									data-testid='email-input'
-									placeholder='jhon.doe@gmail.com'
+									placeholder='ejemplo@galletas.com'
 									{...field}
 								/>
 							</FormControl>
@@ -65,12 +82,12 @@ const LoginPage = () => {
 					name='password'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Password</FormLabel>
+							<FormLabel>Contraseña</FormLabel>
 							<FormControl>
 								<Input
 									type='password'
 									data-testid='password-input'
-									placeholder='******'
+									placeholder='********'
 									{...field}
 								/>
 							</FormControl>
@@ -80,22 +97,22 @@ const LoginPage = () => {
 				/>
 
 				<LinkToForm
-					className='text-end'
-					to='/auth/forgot-password'
-					text='Forgot your password?'
+					className='text-end text-sm text-gray-600 hover:text-gray-800'
+					to='/auth/reset-password'
+					text='¿Olvidaste tu contraseña?'
 				/>
 
-				<Button
+				<LoadingButton
 					type='submit'
-					className='w-full font-semibold text-base'
 					size='lg'
-					variant='purple-dark'>
-					Sign in
-				</Button>
+					variant='purple-dark'
+					isLoading={loginMutation.isPending}>
+					Iniciar Sesión
+				</LoadingButton>
 
 				<LinkToForm
 					to='/auth/register'
-					text="Don't have an account?"
+					text='¿Nuevo por aquí? ¡Regístrate ahora!'
 				/>
 			</form>
 		</Form>

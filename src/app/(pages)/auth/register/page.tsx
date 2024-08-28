@@ -15,9 +15,11 @@ import {
 } from '@/app/_components/ui/form';
 
 import { Input } from '@/app/_components/ui/input';
-import { Button } from '@/app/_components/ui/button';
 import { TypographyH1 } from '@/app/_components/shared/typography';
 import { LinkToForm } from '@/app/_components/auth/LinkToForm';
+import { LoadingButton } from '@/app/_components/shared/buttons/LoadingButton';
+import { useAuthMutation } from '@/app/_hooks/auth/useAuthMutation';
+import { CustomAlert } from '@/app/_components/shared/alert';
 
 const RegisterPage = () => {
 	const form = useForm<z.infer<typeof registerSchema>>({
@@ -29,8 +31,10 @@ const RegisterPage = () => {
 		},
 	});
 
+	const { registeMutation } = useAuthMutation();
+
 	function onSubmit(values: z.infer<typeof registerSchema>) {
-		console.log(values);
+		registeMutation.mutate(values);
 	}
 
 	return (
@@ -38,14 +42,26 @@ const RegisterPage = () => {
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
 				className='space-y-3 w-full'>
-				<TypographyH1 className='text-center'>Sign Up</TypographyH1>
+				<TypographyH1 className='text-center text-3xl font-bold'>
+					¡Únete a la Dulzura!
+				</TypographyH1>
+
+				{registeMutation.isError && (
+					<CustomAlert variant='destructive'>
+						¡Vaya! Algo salió mal. {registeMutation.error.message}
+					</CustomAlert>
+				)}
+
+				{registeMutation.isSuccess && (
+					<CustomAlert variant='success'>{registeMutation.data}</CustomAlert>
+				)}
 
 				<FormField
 					control={form.control}
 					name='username'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Username</FormLabel>
+							<FormLabel>Nombre de Usuario</FormLabel>
 							<FormControl>
 								<Input
 									type='text'
@@ -63,11 +79,11 @@ const RegisterPage = () => {
 					name='email'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Email</FormLabel>
+							<FormLabel>Correo Electrónico</FormLabel>
 							<FormControl>
 								<Input
 									type='email'
-									placeholder='jhoe.doe@gmail.com'
+									placeholder='nombre@dulzuras.com'
 									{...field}
 								/>
 							</FormControl>
@@ -81,7 +97,7 @@ const RegisterPage = () => {
 					name='password'
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Password</FormLabel>
+							<FormLabel>Contraseña</FormLabel>
 							<FormControl>
 								<Input
 									type='password'
@@ -94,17 +110,17 @@ const RegisterPage = () => {
 					)}
 				/>
 
-				<Button
+				<LoadingButton
 					type='submit'
-					className='w-full font-semibold text-base'
 					size='lg'
-					variant='purple-dark'>
-					Sign up
-				</Button>
+					variant='purple-dark'
+					isLoading={registeMutation.isPending}>
+					Registrarse y disfrutar
+				</LoadingButton>
 
 				<LinkToForm
 					to='/auth/login'
-					text='Already have an account?'
+					text='¿Ya tienes una cuenta? ¡Inicia sesión ahora!'
 				/>
 			</form>
 		</Form>

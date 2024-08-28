@@ -7,7 +7,7 @@ import {
 	loginUserUseCase,
 } from '@/core/use-cases/auth';
 
-export const useAuthMutation = (token: string) => {
+export const useAuthMutation = (token?: string) => {
 	const userToken = token ?? '';
 
 	const loginMutation = useMutation({

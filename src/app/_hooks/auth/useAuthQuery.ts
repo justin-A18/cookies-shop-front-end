@@ -1,8 +1,10 @@
+'use client';
+
 import { apiFetcher } from "@/config/adapters/api.adapter";
 import { validateEmailUseCase } from "@/core/use-cases/auth";
 import { useQuery } from "@tanstack/react-query";
 
-const useAuthQuery = (token?: string) => {
+export const useAuthQuery = (token?: string) => {
 
 	const userToken = token ?? '';
 
