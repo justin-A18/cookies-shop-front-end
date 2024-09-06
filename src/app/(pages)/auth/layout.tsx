@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
+import Link from 'next/link';
+
 const layout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<main className='bg-[#F1D1E0] w-full min-h-screen'>
@@ -7,11 +9,13 @@ const layout = ({ children }: { children: React.ReactNode }) => {
 				<article
 					className='max-w-[400px] w-full bg-white p-4 rounded-md flex flex-col 
 				items-center gap-2 shadow-lg'>
-					<img
-						className='size-12'
-						src='/favicon.svg'
-						alt='cookie'
-					/>
+					<Link href='/'>
+						<img
+							className='size-12'
+							src='/favicon.svg'
+							alt='cookie'
+						/>
+					</Link>
 
 					{children}
 				</article>

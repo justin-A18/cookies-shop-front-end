@@ -1,16 +1,18 @@
-import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
+'use client'
+
+import { Avatar, AvatarFallback } from '../../ui/avatar';
+import { FormatHelper } from '@/config/helpers';
 import { ShoppingCart } from 'lucide-react';
 import { Button } from '../../ui/button';
 
-export const NavTabsAuthenticated = () => {
+export const NavTabsAuthenticated = ({username}: {username: string}) => {
 	return (
 		<div className='flex items-center gap-3'>
 			<Button
 				variant='ghost'
 				size='icon'>
 				<Avatar>
-					<AvatarImage src='https://github.com/shadcn.png' />
-					<AvatarFallback>CN</AvatarFallback>
+					<AvatarFallback>{FormatHelper.getInitials(username)}</AvatarFallback>
 				</Avatar>
 			</Button>
 

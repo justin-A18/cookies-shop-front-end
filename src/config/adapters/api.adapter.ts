@@ -1,5 +1,5 @@
 import { HttpAdapter } from "./http";
 
 export const apiFetcher = new HttpAdapter({
-	baseURL: 'http://localhost:3000/api/v1',
+	baseURL: process.env.NEXT_PUBLIC_URL_BASE,
 });

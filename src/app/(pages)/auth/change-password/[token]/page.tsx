@@ -21,6 +21,8 @@ import { useAuthMutation } from '@/app/_hooks/auth/useAuthMutation';
 import { CustomAlert } from '@/app/_components/shared/alert';
 import { LoadingButton } from '@/app/_components/shared/buttons/LoadingButton';
 import { useRouter } from 'next/navigation';
+import { buttonVariants } from '@/app/_components/ui/button';
+import Link from 'next/link';
 
 const ChangePassword = ({ params }: { params: { token: string } }) => {
 	const form = useForm<z.infer<typeof changePasswordSchema>>({
@@ -36,12 +38,6 @@ const ChangePassword = ({ params }: { params: { token: string } }) => {
 
 	function onSubmit(values: z.infer<typeof changePasswordSchema>) {
 		changePasswordMutation.mutate(values);
-	}
-
-	const handleClick = () => {
-		if (!changePasswordMutation.isSuccess) return;
-
-		router.push('/auth/login');
 	}
 
 	return (
@@ -89,10 +85,21 @@ const ChangePassword = ({ params }: { params: { token: string } }) => {
 					type='submit'
 					size='lg'
 					variant='purple-dark'
-					onClick={handleClick}
 					isLoading={changePasswordMutation.isPending}>
 					Cambiar contraseña
 				</LoadingButton>
+
+				{changePasswordMutation.isSuccess && (
+					<Link
+						className={buttonVariants({
+							variant: 'purple-dark',
+							size: 'lg',
+							className: 'w-full font-semibold text-base',
+						})}
+						href='/auth/login'>
+						Inicia sesión
+					</Link>
+				)}
 			</form>
 		</Form>
 	);

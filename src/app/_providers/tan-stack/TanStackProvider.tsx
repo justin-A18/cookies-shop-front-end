@@ -3,7 +3,7 @@
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-const TanStackProvider = ({ children }: { children: React.ReactNode }) => {
+export const TanStackProvider = ({ children }: { children: React.ReactNode }) => {
 	const queryClient = new QueryClient();
 
 	return (
@@ -14,4 +14,3 @@ const TanStackProvider = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
-export default TanStackProvider;

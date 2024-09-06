@@ -14,4 +14,9 @@ export class FormatHelper {
 			year: 'numeric',
 		}).format(date);
 	}
+
+	public static getInitials(text: string): string {
+		return (text.charAt(0).toUpperCase() + text.charAt(text.length - 1).toUpperCase());
+	}
+
 }

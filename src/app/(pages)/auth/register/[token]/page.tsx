@@ -2,8 +2,11 @@
 
 import { LoadingButton } from '@/app/_components/shared/buttons/LoadingButton';
 import { TypographyH2, TypographyP } from '@/app/_components/shared/typography';
+import { CustomAlert } from '@/app/_components/shared/alert';
+import { buttonVariants } from '@/app/_components/ui/button';
 import { useAuthQuery } from '@/app/_hooks/auth/useAuthQuery';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const ConfirmPage = ({ params }: { params: { token: string } }) => {
 	const { validateEmailQuery } = useAuthQuery(params.token);
@@ -11,17 +14,19 @@ const ConfirmPage = ({ params }: { params: { token: string } }) => {
 	const router = useRouter();
 
 	return (
-		<div className='space-y-4'>
+		<div className='space-y-4 w-full'>
 			<TypographyH2 className='text-center'>
 				{validateEmailQuery.isLoading
 					? '¡Estamos horneando tu cuenta!'
-					: '¡Tu cuenta ha sido horneada a la perfección!'}
+					: validateEmailQuery.isSuccess
+					? '¡Tu cuenta ha sido horneada a la perfección!'
+					: 'Algo salió mal'}
 			</TypographyH2>
 
 			{validateEmailQuery.isError && (
-				<TypographyP className='text-center'>
-					{validateEmailQuery.error.message}
-				</TypographyP>
+				<CustomAlert variant='destructive'>
+					¡Vaya! Algo salió mal. {validateEmailQuery.error.message}
+				</CustomAlert>
 			)}
 
 			{!validateEmailQuery.isSuccess && (
@@ -36,8 +41,20 @@ const ConfirmPage = ({ params }: { params: { token: string } }) => {
 				variant='purple-dark'
 				onClick={() => router.push('/auth/login')}
 				isLoading={validateEmailQuery.isLoading}>
-				{validateEmailQuery.isLoading ? 'Horneando...' : 'Saborea tus galletas'}
+				{validateEmailQuery.isLoading ? 'Horneando...' : 'Iniciar sesión'}
 			</LoadingButton>
+
+			{validateEmailQuery.isError && (
+				<Link
+					className={buttonVariants({
+						variant: 'purple-dark',
+						size: 'lg',
+						className: 'w-full font-semibold text-base',
+					})}
+					href='/auth/reset-password'>
+					Reenviar correo
+				</Link>
+			)}
 		</div>
 	);
 };

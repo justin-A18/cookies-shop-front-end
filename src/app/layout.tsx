@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+
+import { TanStackProvider } from './_providers/tan-stack';
+
+import '@/config/env.config';
 import './globals.css';
-import TanStackProvider from './_providers/TanStackProvider';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -19,7 +22,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en'>
+		<html lang='es'>
 			<body
 				suppressHydrationWarning
 				className={inter.variable}>

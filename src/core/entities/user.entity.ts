@@ -1,4 +1,4 @@
-import { Roles } from "@/infrastructure/interfaces/api.response";
+import { Roles } from "@/infrastructure/interfaces";
 
 export interface UserEntity {
 	id: string;
