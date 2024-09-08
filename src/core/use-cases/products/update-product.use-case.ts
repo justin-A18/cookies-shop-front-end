@@ -1,6 +1,5 @@
-import { ProductsMapper } from "@/infrastructure/mappers/products/products.mapper";
+import { MessageResponse } from "@/infrastructure/interfaces";
 import { HttpAdapter } from "@/config/adapters/http";
-import { ProductEntity } from "@/core/entities";
 
 interface Options {
 	id: string;
@@ -10,6 +9,6 @@ interface Options {
 }
 
 export const updateProductUseCase = async ({ apiFetcher, body, id, token }: Options) => {
-	const product = await apiFetcher.patch<ProductEntity>(`/products/${id}`,body, token);
-	return ProductsMapper.fromEntity(product);
+	const message = await apiFetcher.patch<MessageResponse>(`/products/${id}`, body, token);
+	return message;
 };

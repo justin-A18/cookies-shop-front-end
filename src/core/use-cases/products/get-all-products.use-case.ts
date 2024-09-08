@@ -1,4 +1,4 @@
-import { ProductsMapper } from '@/infrastructure/mappers/products/products.mapper';
+import { ProductsMapper } from '@/infrastructure/mappers/products';
 import { HttpAdapter } from '@/config/adapters/http';
 import { ProductEntity } from '@/core/entities';
 
