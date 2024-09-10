@@ -1,4 +1,4 @@
-export * from './useEmailValidation';
+export * from './useUserEmailValidation';
 export * from './useUserLoginMutation';
 export * from './useUserRegisterMutation';
 export * from './useUserChangePassword';
