@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { Button } from '../../ui/button';
 import { X } from 'lucide-react';
+
+import { Button } from '../../ui/button';
 
 const navLinks = [
 	{

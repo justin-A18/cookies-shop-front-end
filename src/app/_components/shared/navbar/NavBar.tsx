@@ -29,7 +29,11 @@ export const NavBar = () => {
 					closeMenu={toggle}
 				/>
 
-				{user ? <NavTabsAuthenticated username={username} /> : <LinksAuth />}
+				{typeof window !== 'undefined' && user ? (
+					<NavTabsAuthenticated username={username} />
+				) : (
+					<LinksAuth />
+				)}
 			</nav>
 		</header>
 	);
