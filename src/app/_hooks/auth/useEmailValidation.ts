@@ -4,14 +4,11 @@ import { apiFetcher } from "@/config/adapters/api.adapter";
 import { validateEmailUseCase } from "@/core/use-cases/auth";
 import { useQuery } from "@tanstack/react-query";
 
-export const useAuthQuery = (token?: string) => {
-
-	const userToken = token ?? '';
-
+export const useUserEmailValidation = (token: string) => {
 	const validateEmailQuery = useQuery({
-		queryKey: ["validateEmail", { token: userToken }],
+		queryKey: ["validateEmail", { token }],
 		queryFn: () => {
-			return validateEmailUseCase(apiFetcher, userToken);
+			return validateEmailUseCase(apiFetcher, token);
 		},
 	});
 

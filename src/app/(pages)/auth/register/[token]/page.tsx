@@ -1,15 +1,19 @@
 'use client';
 
-import { LoadingButton } from '@/app/_components/shared/buttons/LoadingButton';
-import { TypographyH2, TypographyP } from '@/app/_components/shared/typography';
-import { CustomAlert } from '@/app/_components/shared/alert';
-import { buttonVariants } from '@/app/_components/ui/button';
-import { useAuthQuery } from '@/app/_hooks/auth/useAuthQuery';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
+import { useUserEmailValidation } from '@/app/_hooks/auth';
+
+import { TypographyH2, TypographyP } from '@/app/_components/shared/typography';
+import { LoadingButton } from '@/app/_components/shared/buttons';
+import { CustomAlert } from '@/app/_components/shared/alert';
+import { buttonVariants } from '@/app/_components/ui/button';
+
+
+
 const ConfirmPage = ({ params }: { params: { token: string } }) => {
-	const { validateEmailQuery } = useAuthQuery(params.token);
+	const { validateEmailQuery } = useUserEmailValidation(params.token);
 
 	const router = useRouter();
 

@@ -4,12 +4,7 @@ import { ProductEntity } from '@/core/entities';
 
 export const getAllProductsUseCase = async (
 	apiFetcher: HttpAdapter,
-	token: string,
 ) => {
-	const products = await apiFetcher.get<ProductEntity[]>(
-		'/products',
-		token,
-	);
-	
+	const products = await apiFetcher.get<ProductEntity[]>('/products');
 	return ProductsMapper.fromEntities(products);
 };

@@ -1,9 +1,17 @@
 'use client';
 
-import { loginSchema } from '@/app/_schemas/user.schema';
+import { loginValidationSchema } from '@/app/_schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+
+import { useUserLoginMutation } from '@/app/_hooks/auth';
+
+import { TypographyH1 } from '@/app/_components/shared/typography';
+import { LoadingButton } from '@/app/_components/shared/buttons';
+import { CustomAlert } from '@/app/_components/shared/alert';
+import { LinkToForm } from '@/app/_components/auth';
+import { Input } from '@/app/_components/ui/input';
 
 import {
 	Form,
@@ -14,25 +22,18 @@ import {
 	FormMessage,
 } from '@/app/_components/ui/form';
 
-import { Input } from '@/app/_components/ui/input';
-import { TypographyH1 } from '@/app/_components/shared/typography';
-import { LinkToForm } from '@/app/_components/auth/LinkToForm';
-import { useAuthMutation } from '@/app/_hooks/auth/useAuthMutation';
-import { LoadingButton } from '@/app/_components/shared/buttons/LoadingButton';
-import { CustomAlert } from '@/app/_components/shared/alert';
-
 const LoginPage = () => {
-	const form = useForm<z.infer<typeof loginSchema>>({
-		resolver: zodResolver(loginSchema),
+	const form = useForm<z.infer<typeof loginValidationSchema>>({
+		resolver: zodResolver(loginValidationSchema),
 		defaultValues: {
 			email: '',
 			password: '',
 		},
 	});
 
-	const { loginMutation } = useAuthMutation();
+	const { loginMutation } = useUserLoginMutation();
 
-	function onSubmit(values: z.infer<typeof loginSchema>) {
+	function onSubmit(values: z.infer<typeof loginValidationSchema>) {
 		loginMutation.mutate(values);
 	}
 

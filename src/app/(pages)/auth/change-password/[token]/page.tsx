@@ -1,10 +1,20 @@
 /* eslint-disable react/no-unescaped-entities */
 'use client';
 
-import { changePasswordSchema } from '@/app/_schemas/user.schema';
+import Link from 'next/link';
+
+import { changePasswordValidationSchema } from '@/app/_schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+
+import { useUserChangePassword } from '@/app/_hooks/auth';
+
+import { TypographyH1 } from '@/app/_components/shared/typography';
+import { LoadingButton } from '@/app/_components/shared/buttons';
+import { buttonVariants } from '@/app/_components/ui/button';
+import { CustomAlert } from '@/app/_components/shared/alert';
+import { Input } from '@/app/_components/ui/input';
 
 import {
 	Form,
@@ -15,28 +25,17 @@ import {
 	FormMessage,
 } from '@/app/_components/ui/form';
 
-import { Input } from '@/app/_components/ui/input';
-import { TypographyH1 } from '@/app/_components/shared/typography';
-import { useAuthMutation } from '@/app/_hooks/auth/useAuthMutation';
-import { CustomAlert } from '@/app/_components/shared/alert';
-import { LoadingButton } from '@/app/_components/shared/buttons/LoadingButton';
-import { useRouter } from 'next/navigation';
-import { buttonVariants } from '@/app/_components/ui/button';
-import Link from 'next/link';
-
 const ChangePassword = ({ params }: { params: { token: string } }) => {
-	const form = useForm<z.infer<typeof changePasswordSchema>>({
-		resolver: zodResolver(changePasswordSchema),
+	const form = useForm<z.infer<typeof changePasswordValidationSchema>>({
+		resolver: zodResolver(changePasswordValidationSchema),
 		defaultValues: {
 			password: '',
 		},
 	});
 
-	const router = useRouter();
+	const { changePasswordMutation } = useUserChangePassword(params.token);
 
-	const { changePasswordMutation } = useAuthMutation(params.token);
-
-	function onSubmit(values: z.infer<typeof changePasswordSchema>) {
+	function onSubmit(values: z.infer<typeof changePasswordValidationSchema>) {
 		changePasswordMutation.mutate(values);
 	}
 

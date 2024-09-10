@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const loginSchema = z.object({
+export const loginValidationSchema = z.object({
 	email: z.string().email({
 		message: 'Por favor, ingresa un correo electrónico válido.',
 	}),
@@ -11,7 +11,7 @@ export const loginSchema = z.object({
 		}),
 });
 
-export const registerSchema = z.object({
+export const registerValidationSchema = z.object({
 	username: z.string().min(2, {
 		message: 'El nombre de usuario debe tener al menos 2 caracteres.',
 	}),
@@ -25,13 +25,13 @@ export const registerSchema = z.object({
 		}),
 });
 
-export const resetPasswordSchema = z.object({
+export const resetPasswordValidationSchema = z.object({
 	email: z.string().email({
 		message: 'Por favor, ingresa un correo electrónico válido.',
 	}),
 })
 
-export const changePasswordSchema = z.object({
+export const changePasswordValidationSchema = z.object({
 	password: z
 		.string()
 		.min(6, {

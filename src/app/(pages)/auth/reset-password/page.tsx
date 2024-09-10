@@ -1,10 +1,18 @@
 /* eslint-disable react/no-unescaped-entities */
 'use client';
 
-import { resetPasswordSchema } from '@/app/_schemas/user.schema';
+import { resetPasswordValidationSchema } from '@/app/_schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+
+
+import { useUserResetPasswordMutation } from '@/app/_hooks/auth';
+import { TypographyH1 } from '@/app/_components/shared/typography';
+import { LoadingButton } from '@/app/_components/shared/buttons';
+import { CustomAlert } from '@/app/_components/shared/alert';
+import { LinkToForm } from '@/app/_components/auth';
+import { Input } from '@/app/_components/ui/input';
 
 import {
 	Form,
@@ -15,24 +23,17 @@ import {
 	FormMessage,
 } from '@/app/_components/ui/form';
 
-import { Input } from '@/app/_components/ui/input';
-import { TypographyH1 } from '@/app/_components/shared/typography';
-import { LinkToForm } from '@/app/_components/auth/LinkToForm';
-import { useAuthMutation } from '@/app/_hooks/auth/useAuthMutation';
-import { CustomAlert } from '@/app/_components/shared/alert';
-import { LoadingButton } from '@/app/_components/shared/buttons/LoadingButton';
-
 const ResetPassword = () => {
-	const form = useForm<z.infer<typeof resetPasswordSchema>>({
-		resolver: zodResolver(resetPasswordSchema),
+	const form = useForm<z.infer<typeof resetPasswordValidationSchema>>({
+		resolver: zodResolver(resetPasswordValidationSchema),
 		defaultValues: {
 			email: '',
 		},
 	});
 
-	const { resetPasswordMutation } = useAuthMutation();
+	const { resetPasswordMutation } = useUserResetPasswordMutation();
 
-	function onSubmit(values: z.infer<typeof resetPasswordSchema>) {
+	function onSubmit(values: z.infer<typeof resetPasswordValidationSchema>) {
 		resetPasswordMutation.mutate(values);
 	}
 

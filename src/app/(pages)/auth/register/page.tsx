@@ -1,9 +1,17 @@
 'use client';
 
-import { registerSchema } from '@/app/_schemas/user.schema';
+import { registerValidationSchema } from '@/app/_schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+
+import { useUserRegisterMutation } from '@/app/_hooks/auth';
+
+import { TypographyH1 } from '@/app/_components/shared/typography';
+import { LoadingButton } from '@/app/_components/shared/buttons';
+import { CustomAlert } from '@/app/_components/shared/alert';
+import { LinkToForm } from '@/app/_components/auth';
+import { Input } from '@/app/_components/ui/input';
 
 import {
 	Form,
@@ -14,16 +22,9 @@ import {
 	FormMessage,
 } from '@/app/_components/ui/form';
 
-import { Input } from '@/app/_components/ui/input';
-import { TypographyH1 } from '@/app/_components/shared/typography';
-import { LinkToForm } from '@/app/_components/auth/LinkToForm';
-import { LoadingButton } from '@/app/_components/shared/buttons/LoadingButton';
-import { useAuthMutation } from '@/app/_hooks/auth/useAuthMutation';
-import { CustomAlert } from '@/app/_components/shared/alert';
-
 const RegisterPage = () => {
-	const form = useForm<z.infer<typeof registerSchema>>({
-		resolver: zodResolver(registerSchema),
+	const form = useForm<z.infer<typeof registerValidationSchema>>({
+		resolver: zodResolver(registerValidationSchema),
 		defaultValues: {
 			email: '',
 			password: '',
@@ -31,9 +32,9 @@ const RegisterPage = () => {
 		},
 	});
 
-	const { registeMutation } = useAuthMutation();
+	const { registeMutation } = useUserRegisterMutation();
 
-	function onSubmit(values: z.infer<typeof registerSchema>) {
+	function onSubmit(values: z.infer<typeof registerValidationSchema>) {
 		registeMutation.mutate(values);
 	}
 
