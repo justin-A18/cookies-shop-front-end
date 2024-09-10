@@ -1,4 +1,4 @@
-import { TokenPayload } from "@/infrastructure/interfaces/api.response";
+import { TokenPayload } from "@/infrastructure/interfaces/auth.response";
 import { UserEntity } from "@/core/entities";
 
 export class AuthMapper {
