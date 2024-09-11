@@ -116,7 +116,7 @@ const RegisterPage = () => {
 					size='lg'
 					variant='purple-dark'
 					isLoading={registeMutation.isPending}>
-					Registrarse y disfrutar
+					Registrarse y disfruta
 				</LoadingButton>
 
 				<LinkToForm

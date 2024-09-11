@@ -2,29 +2,8 @@ import Link from 'next/link';
 import { X } from 'lucide-react';
 
 import { Button } from '../../ui/button';
+import { navLinks } from '@/config/const';
 
-const navLinks = [
-	{
-		id: 1,
-		label: 'Inicio',
-		href: '/',
-	},
-	{
-		id: 2,
-		label: 'Explorar',
-		href: '/explore',
-	},
-	{
-		id: 3,
-		label: 'Productos',
-		href: '/products',
-	},
-	{
-		id: 4,
-		label: 'Sobre nosotros',
-		href: '/about-us',
-	}
-];
 
 export const NavLinks = ({
 	isOpen,
