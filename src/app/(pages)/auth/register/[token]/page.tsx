@@ -1,15 +1,12 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 
 import { useUserEmailValidation } from '@/app/_hooks/auth';
 
 import { TypographyH2, TypographyP } from '@/app/_components/shared/typography';
 import { LoadingButton } from '@/app/_components/shared/buttons';
 import { CustomAlert } from '@/app/_components/shared/alert';
-import { buttonVariants } from '@/app/_components/ui/button';
-
 
 
 const ConfirmPage = ({ params }: { params: { token: string } }) => {
@@ -47,18 +44,6 @@ const ConfirmPage = ({ params }: { params: { token: string } }) => {
 				isLoading={validateEmailQuery.isLoading}>
 				{validateEmailQuery.isLoading ? 'Horneando...' : 'Iniciar sesión'}
 			</LoadingButton>
-
-			{validateEmailQuery.isError && (
-				<Link
-					className={buttonVariants({
-						variant: 'purple-dark',
-						size: 'lg',
-						className: 'w-full font-semibold text-base',
-					})}
-					href='/auth/reset-password'>
-					Reenviar correo
-				</Link>
-			)}
 		</div>
 	);
 };

@@ -1,7 +1,7 @@
 import { CardShop } from '@/app/_components/shared/cards/CardShop';
 import { TypographyH1 } from '@/app/_components/shared/typography';
 
-const page = () => {
+const ProductsPage = () => {
 	return (
 		<section className='flex items-center flex-col gap-8'>
 			<TypographyH1 className='font-light'>/ ELIGE TUS GALLETAS</TypographyH1>
@@ -59,4 +59,4 @@ const page = () => {
 	);
 };
 
-export default page;
+export default ProductsPage;

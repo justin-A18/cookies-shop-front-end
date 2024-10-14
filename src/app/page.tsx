@@ -1,7 +1,7 @@
 import { BestSellers } from './_components/home/best-sellers/BestSellers';
 import { Flavors } from './_components/home/flavors/Flavors';
 import { Slider } from './_components/home/slider/Slider';
-import { NavBar } from './_components/shared/navbar';
+import { NavBar } from './_components/shared/navbar/navbar-client';
 
 export default function Home() {
 	return (

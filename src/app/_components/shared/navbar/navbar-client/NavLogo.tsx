@@ -1,6 +1,6 @@
+import { Button } from '@/app/_components/ui/button';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
-import { Button } from '../../ui/button';
 
 export const NavLogo = ({ toggle }: { toggle: () => void }) => {
 	return (

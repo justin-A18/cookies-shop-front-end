@@ -1,8 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 'use client';
 
-import Link from 'next/link';
-
 import { changePasswordValidationSchema } from '@/app/_schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -12,7 +10,6 @@ import { useUserChangePassword } from '@/app/_hooks/auth';
 
 import { TypographyH1 } from '@/app/_components/shared/typography';
 import { LoadingButton } from '@/app/_components/shared/buttons';
-import { buttonVariants } from '@/app/_components/ui/button';
 import { CustomAlert } from '@/app/_components/shared/alert';
 import { Input } from '@/app/_components/ui/input';
 
@@ -87,18 +84,6 @@ const ChangePassword = ({ params }: { params: { token: string } }) => {
 					isLoading={changePasswordMutation.isPending}>
 					Cambiar contraseña
 				</LoadingButton>
-
-				{changePasswordMutation.isSuccess && (
-					<Link
-						className={buttonVariants({
-							variant: 'purple-dark',
-							size: 'lg',
-							className: 'w-full font-semibold text-base',
-						})}
-						href='/auth/login'>
-						Inicia sesión
-					</Link>
-				)}
 			</form>
 		</Form>
 	);

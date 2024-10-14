@@ -1,9 +1,9 @@
 'use client'
 
-import { Avatar, AvatarFallback } from '../../ui/avatar';
+import { Button } from '@/app/_components/ui/button';
+import { Avatar, AvatarFallback } from '@/app/_components/ui/avatar';
 import { FormatHelper } from '@/config/helpers';
 import { ShoppingCart } from 'lucide-react';
-import { Button } from '../../ui/button';
 
 export const NavTabsAuthenticated = ({username}: {username: string}) => {
 	return (

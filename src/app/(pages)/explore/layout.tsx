@@ -1,4 +1,4 @@
-import { NavBar } from '@/app/_components/shared/navbar';
+import { NavBar } from '@/app/_components/shared/navbar/navbar-client';
 
 const ExploreLayout = ({ children }: { children: React.ReactNode }) => {
 	return (

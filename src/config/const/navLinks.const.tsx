@@ -1,3 +1,5 @@
+import { LayoutGrid, Package, User } from 'lucide-react';
+
 export const navLinks = [
 	{
 		id: 1,
@@ -18,18 +20,26 @@ export const navLinks = [
 		id: 4,
 		label: 'Sobre nosotros',
 		href: '/about-us',
-	}
+	},
 ];
 
 export const navLinksAdmin = [
 	{
 		id: 0,
-		label: 'Productos',
-		href: '/admin/products',
+		label: 'Dashboard',
+		href: '/admin',
+		icon: <LayoutGrid />,
 	},
 	{
 		id: 1,
-		label: 'Clientes',
-		href: '/admin/categories',
+		label: 'Productos',
+		href: '/admin/products',
+		icon: <Package />,
 	},
-]
+	{
+		id: 2,
+		label: 'Clientes',
+		href: '/admin/clients',
+		icon: <User />,
+	},
+];

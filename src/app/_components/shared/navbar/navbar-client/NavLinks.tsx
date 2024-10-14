@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { X } from 'lucide-react';
 
-import { Button } from '../../ui/button';
 import { navLinks } from '@/config/const';
+import { Button } from '@/app/_components/ui/button';
 
 
 export const NavLinks = ({

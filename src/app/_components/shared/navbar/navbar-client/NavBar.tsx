@@ -1,6 +1,6 @@
 'use client';
 
-import { NavTabsAuthenticated, NavLinks, NavLogo, LinksAuth } from './';
+import { NavTabsAuthenticated, NavLinks, NavLogo, LinksAuth } from '.';
 import { authStore } from '@/app/_providers/store/auth';
 import { useEffect, useState } from 'react';
 
